@@ -1,0 +1,10 @@
+version: "2"
+domain: geode.apache.org
+repo: geode-k8s
+resources:
+- group: geodecluster
+  version: v1
+  kind: Locator
+- group: geodecluster
+  version: v1
+  kind: Server

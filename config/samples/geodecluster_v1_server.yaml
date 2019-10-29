@@ -1,0 +1,7 @@
+apiVersion: geodecluster.geode.apache.org/v1
+kind: Server
+metadata:
+  name: server-sample
+spec:
+  # Add fields here
+  foo: bar
