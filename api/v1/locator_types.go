@@ -16,7 +16,9 @@ limitations under the License.
 package v1
 
 import (
+	"strings"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -24,20 +26,39 @@ import (
 
 // LocatorSpec defines the desired state of Locator
 type LocatorSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Locator. Edit Locator_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	
+	// Specifies the number of Locators desired in the cluster, validation to constrain to 1-3
+	// +kubebuilder:validation:Enum=1;3
+	Replicas	int	`json:"replicas"`
+
+	
+	Image		string	`json:"image,omitempty"`
+	
+	// On by default, but optionally can be turned off
+	// +optional
+	Metrics		*bool	`json:"metrics,omitempty"`
+
+	// On by default but optionally can be turned off
+	// +optional
+	Pulse		*bool  	`json:"pulse,omitempty"`
+
+	// +optional
+	NamePrefix	string 	`json:"name-prefix,omitempty"`
+
 }
 
 // LocatorStatus defines the observed state of Locator
 type LocatorStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	LocatorStatus string `json:"locatorStatus,omitempty"`
 }
 
 // +kubebuilder:object:root=true
+
+// We want a status subresource so that we behave like built-in kubernetes type
+// +kubebuilder:subresource:status
 
 // Locator is the Schema for the locators API
 type Locator struct {
