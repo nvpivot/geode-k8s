@@ -1,4 +1,4 @@
-# geode-k8s
+# Geode-k8s!
 
 Initially utilized Kubebuilder to create a Kind for Locator and Server under the group GeodeCluster.
 
